@@ -26,7 +26,11 @@ public class SimpleMqttConsumer {
     private static String BROKER_ADDRESS = "127.0.0.1";
 
     //PORT of the target MQTT Broker
-    private static int BROKER_PORT = 1883;
+    //Physical DEVICE BROKER
+    //private static int BROKER_PORT = 1883;
+
+    //Digital Twin Broker
+    private static int BROKER_PORT = 1884;
 
     private static String TARGET_TOPIC = "#";
 

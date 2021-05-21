@@ -1,6 +1,8 @@
 # MQTT Digital Twin Example - WhiteLabel Digital Twin Framework
 
-This project shows how to implement a Digital Twin for an MQTT Device trough the WLDT Framework.
+This project shows how to implement a Digital Twin for an MQTT Device through the WLDT Framework.
+Both a demo MQTT device and an MQTT Consumer has been included in the repository in order to easily test the example.
+The MQTT broker is not included in the repository, and an external one should be used.
 
 The MQTT-to-MQTT built-in IoT dedicated worker is implemented through the class \code{Mqtt2MqttWorker} 
 providing a configurable way to automatically synchronize data between twins over MQTT. 

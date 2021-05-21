@@ -8,25 +8,25 @@ package it.unimore.dipi.iot.demo.mqtt.wldt;
  * @project wldt-core
  * @created 10/03/2021 - 12:48
  */
-public class DemoDataStructure {
+public class CommandDataStructure {
 
-    private String type = "demo_data_structure";
+    private String type = "demo_command_data_structure";
 
     private long timestamp;
 
     private String originalMessage;
 
-    public DemoDataStructure(byte[] originalPayload) {
+    public CommandDataStructure(byte[] originalPayload) {
         this.timestamp = System.currentTimeMillis();
         this.originalMessage = new String(originalPayload);
     }
 
-    public DemoDataStructure(String originalMessage) {
+    public CommandDataStructure(String originalMessage) {
         this.timestamp = System.currentTimeMillis();
         this.originalMessage = originalMessage;
     }
 
-    public DemoDataStructure(String type, long timestamp, String originalMessage) {
+    public CommandDataStructure(String type, long timestamp, String originalMessage) {
         this.type = type;
         this.timestamp = timestamp;
         this.originalMessage = originalMessage;

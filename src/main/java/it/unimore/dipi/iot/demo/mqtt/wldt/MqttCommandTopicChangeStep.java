@@ -1,7 +1,5 @@
 package it.unimore.dipi.iot.demo.mqtt.wldt;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import it.unimore.dipi.iot.wldt.processing.PipelineData;
 import it.unimore.dipi.iot.wldt.processing.ProcessingStep;
 import it.unimore.dipi.iot.wldt.processing.ProcessingStepListener;
@@ -14,22 +12,18 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * WLDT ProcessingStep that changes the incoming MQTT Payload (a number)
- * into a new structured payload modeled through the class DemoDataStructure
+ * WLDT ProcessingStep that changes the outgoing topic keeping the same
+ * received payload
  *
  * @author : Marco Picone, Ph.D. (marco.picone@unimore.it)
  * @created: 21/05/2021
  * @project: WLDT - MQTT Example
  */
-public class MqttPayloadChangeStep implements ProcessingStep {
+public class MqttCommandTopicChangeStep implements ProcessingStep {
 
-    private static final Logger logger = LoggerFactory.getLogger(MqttPayloadChangeStep.class);
+    private static final Logger logger = LoggerFactory.getLogger(MqttCommandTopicChangeStep.class);
 
-    private ObjectMapper mapper;
-
-    public MqttPayloadChangeStep() {
-        this.mapper = new ObjectMapper();
-        this.mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+    public MqttCommandTopicChangeStep() {
     }
 
     @Override
@@ -47,7 +41,8 @@ public class MqttPayloadChangeStep implements ProcessingStep {
         try{
 
             if(listener != null && Objects.requireNonNull(data).getPayload() != null) {
-                listener.onStepDone(this, Optional.of(new MqttPipelineData(data.getTopic(), data.getMqttTopicDescriptor(), mapper.writeValueAsBytes(new CommandDataStructure(data.getPayload())), data.isRetained())));
+                String newTopic = data.getTopic().replace("wldt/command/", "command/");
+                listener.onStepDone(this, Optional.of(new MqttPipelineData(newTopic, data.getMqttTopicDescriptor(), data.getPayload(), data.isRetained())));
             }
             else
                 logger.error("Processing Step Listener or MqttProcessingInfo Data = Null ! Skipping processing step");

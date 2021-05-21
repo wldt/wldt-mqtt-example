@@ -27,8 +27,10 @@ public class DemoMqttDevice {
     private static final int MESSAGE_COUNT = 1000;
 
     //Topic used to publish generated demo data E.g.: telemetry/{{device_id}}/resource/{{resource_id}}
-    private static final String TOPIC = "telemetry/com:iot:dummy:dummyMqttDevice001/resource/temperature";
-    
+    private static final String TELEMETRY_TOPIC = "telemetry/com:iot:dummy:dummyMqttDevice001/resource/temperature";
+
+    private static final String COMMAND_TOPIC = "command/com:iot:dummy:dummyMqttDevice001";
+
     public static void main(String[] args) {
 
         logger.info("SimpleProducer started ...");
@@ -59,6 +61,8 @@ public class DemoMqttDevice {
 
             logger.info("Connected ! Client Id: {}", mqttClientId);
 
+            handleReceivedCommands(client);
+
             //Create an instance of an Engine Temperature Sensor
             TemperatureSensor temperatureSensor = new TemperatureSensor();
 
@@ -70,7 +74,7 @@ public class DemoMqttDevice {
             	String payloadString = Double.toString(sensorValue);
 
             	//Internal Method to publish MQTT data using the created MQTT Client
-            	publishData(client, TOPIC, payloadString);
+            	publishData(client, TELEMETRY_TOPIC, payloadString);
 
             	//Sleep for 1 Second
             	Thread.sleep(1000);
@@ -86,6 +90,26 @@ public class DemoMqttDevice {
             e.printStackTrace();
         }
 
+    }
+
+    private static void handleReceivedCommands(IMqttClient client){
+
+        try{
+
+            logger.info("Subscribing to the Command topic: {}", COMMAND_TOPIC);
+
+            if(client != null && client.isConnected())
+                client.subscribe(COMMAND_TOPIC, new IMqttMessageListener() {
+                    @Override
+                    public void messageArrived(String topic, MqttMessage msg) throws Exception {
+                        byte[] payload = msg.getPayload();
+                        logger.info("Message Command Received ({}) Message Received: {}", topic, new String(payload));
+                    }
+                });
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -107,8 +131,8 @@ public class DemoMqttDevice {
             msg.setQos(0);
             msg.setRetained(false);
             mqttClient.publish(topic,msg);
-            
-            logger.debug("Data Correctly Published !");
+
+            logger.info("Data Correctly Published to Topic: {} Data: {}", topic, msgString);
         }
         else{
             logger.error("Error: Topic or Msg = Null or MQTT Client is not Connected !");
