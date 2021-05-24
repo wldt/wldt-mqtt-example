@@ -41,7 +41,7 @@ public class MqttCommandTopicChangeStep implements ProcessingStep {
         try{
 
             if(listener != null && Objects.requireNonNull(data).getPayload() != null) {
-                String newTopic = data.getTopic().replace("wldt/command/", "command/");
+                String newTopic = data.getTopic().replace("command/", "cmd/");
                 listener.onStepDone(this, Optional.of(new MqttPipelineData(newTopic, data.getMqttTopicDescriptor(), data.getPayload(), data.isRetained())));
             }
             else
@@ -54,18 +54,4 @@ public class MqttCommandTopicChangeStep implements ProcessingStep {
                 listener.onStepError(this, data, e.getLocalizedMessage());
         }
     }
-
-
-    private static boolean isNumeric(String strNum) {
-        if (strNum == null) {
-            return false;
-        }
-        try {
-            double d = Double.parseDouble(strNum);
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
-        return true;
-    }
-
 }

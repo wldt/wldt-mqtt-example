@@ -136,7 +136,7 @@ public class WldtMqttProcess {
         mqtt2MqttConfiguration.setBrokerPort(SOURCE_BROKER_PORT);
         mqtt2MqttConfiguration.setDestinationBrokerAddress(DESTINATION_BROKER_ADDRESS);
         mqtt2MqttConfiguration.setDestinationBrokerPort(DESTINATION_BROKER_PORT);
-        //mqtt2MqttConfiguration.setDtTopicPrefix(DT_PREFIX);
+        mqtt2MqttConfiguration.setDtTopicPrefix(DT_PREFIX);
         mqtt2MqttConfiguration.setDeviceId(DEVICE_ID);
 
         //Specify Topic List Configuration

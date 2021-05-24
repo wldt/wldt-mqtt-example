@@ -29,7 +29,7 @@ public class DemoMqttDevice {
     //Topic used to publish generated demo data E.g.: telemetry/{{device_id}}/resource/{{resource_id}}
     private static final String TELEMETRY_TOPIC = "telemetry/com:iot:dummy:dummyMqttDevice001/resource/temperature";
 
-    private static final String COMMAND_TOPIC = "command/com:iot:dummy:dummyMqttDevice001";
+    private static final String COMMAND_TOPIC = "cmd/com:iot:dummy:dummyMqttDevice001";
 
     public static void main(String[] args) {
 
