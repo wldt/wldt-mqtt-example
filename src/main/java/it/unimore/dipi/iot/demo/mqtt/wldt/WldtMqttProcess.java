@@ -22,10 +22,12 @@ import java.util.Map;
  * Telemetry:
  *
  * DEVICE ---- [msg] ----> BROKER-A ----> (DT) ---- [msg] ---- BROKER-B ----> CONSUMER(s)
+ *                       (Port:1883)                          (Port:1884)
  *
  * Commands:
  *
  * DEVICE <---- [msg] ---- BROKER-A <---- (DT) <---- [msg] ---- BROKER-B <---- APP(s)
+ *                        (Port:1883)                          (Port:1884)
  *
  * @author : Marco Picone, Ph.D. (marco.picone@unimore.it)
  * @created: 21/05/2021
