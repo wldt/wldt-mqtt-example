@@ -49,8 +49,6 @@ public class WldtMqttProcess {
     private static final String DESTINATION_BROKER_ADDRESS = "127.0.0.1";
     private static final int DESTINATION_BROKER_PORT = 1884;
 
-    private static final String DT_PREFIX = "wldt";
-
     private static final String DEVICE_ID = "com:iot:dummy:dummyMqttDevice001";
 
     public static void main(String[] args)  {
@@ -136,7 +134,6 @@ public class WldtMqttProcess {
         mqtt2MqttConfiguration.setBrokerPort(SOURCE_BROKER_PORT);
         mqtt2MqttConfiguration.setDestinationBrokerAddress(DESTINATION_BROKER_ADDRESS);
         mqtt2MqttConfiguration.setDestinationBrokerPort(DESTINATION_BROKER_PORT);
-        mqtt2MqttConfiguration.setDtTopicPrefix(DT_PREFIX);
         mqtt2MqttConfiguration.setDeviceId(DEVICE_ID);
 
         //Specify Topic List Configuration
