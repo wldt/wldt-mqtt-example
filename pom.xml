@@ -14,7 +14,7 @@
         <jackson.version>[2.9.10.7,)</jackson.version>
         <logback.version>1.0.13</logback.version>
         <junit.version>[4.13.1,)</junit.version>
-        <wldt.version>0.1.3.5</wldt.version>
+        <wldt.version>0.1.3.6</wldt.version>
         <paho.version>[1.2.1,)</paho.version>
         <javax.inject>1</javax.inject>
         <maven.compiler.source>1.8</maven.compiler.source>
